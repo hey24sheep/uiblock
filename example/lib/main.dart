@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -42,6 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
   // ValueListenable<int> _listenable = ValueListenable();
   ValueNotifier<int> _counter = ValueNotifier<int>(0);
 
+  bool showLoader = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,6 +59,37 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
+              FlatButton(
+                child: Text('Load Async'),
+                onPressed: () {
+                  setState(() {
+                    showLoader = !showLoader;
+                  });
+                },
+              ),
+              Container(
+                height: 100,
+                child: UIBlock(
+                  loadingStateFromFuture: () async {
+                    if (showLoader) {
+                      // return null, to show loader
+                      return null;
+                    }
+                    // hides loader on hasData or HasError
+                    return Future.value(Random().nextInt(200));
+                  },
+                  barrierColor: Colors.blueGrey,
+                  barrierOpacity: 0.2,
+                  loadingTextWidget: Text('Loading data...'),
+                  hideBuilderOnNullData: true,
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    return Center(
+                      child: Text('Async Data ${snapshot.data}'),
+                    );
+                  },
+                ),
+              ),
               Expanded(
                 child: ListView(
                   children: <Widget>[

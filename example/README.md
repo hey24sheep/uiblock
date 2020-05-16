@@ -58,3 +58,39 @@ UIBlock.block(
 
  // Don't forget to call unblock after block :)
 ```
+
+## Using as a widget
+
+```dart
+//toggle showLoader to block/unblock
+FlatButton(
+    child: Text('Load Async'),
+    onPressed: () {
+        setState(() {
+            showLoader = !showLoader;
+        });
+    },
+),
+
+ // easily create custom block ui body
+ Container(
+    height: _height,
+    child: UIBlock(
+        loadingStateFromFuture: () async {
+        if (showLoader) {
+            // return null, to block ui
+            return null;
+        }
+        // unblocks ui on hasData or hasError
+        return Future.value(Random().nextInt(200));
+        },
+        barrierColor: Colors.blueGrey,
+        barrierOpacity: 0.2,
+        loadingTextWidget: Text('Loading data...'),
+        hideBuilderOnNullData: true,
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            return Center(child: Text('Async Data ${snapshot.data}'));
+        },
+    ),
+ );
+```

@@ -5,7 +5,7 @@
 
 **Easiest and simplest method to block/unblock ui for your flutter apps.**
 
-**One line of code** to **block/unblock ui** and stop user from navigating during loading or processing in your flutter apps.
+**One line of code** to **block/unblock ui** and stop user from navigating during loading or processing in your flutter apps. You could use it as a widget or directly as a global service/util.
 
 - **Fully customizable**
 - **Android and IOS**
@@ -16,6 +16,7 @@
 
 
 <p>
+<img src="https://github.com/hey24sheep/uiblock/raw/master/screenshots/example5.gif" width="220" height="440" />
 <img src="https://github.com/hey24sheep/uiblock/raw/master/screenshots/example1.gif" width="220" height="440" />
 <img src="https://github.com/hey24sheep/uiblock/raw/master/screenshots/example2.gif" width="220" height="440" />
 <img src="https://github.com/hey24sheep/uiblock/raw/master/screenshots/example3.gif" width="220" height="440" />
@@ -51,6 +52,44 @@ To unblock ui
  // if using globalKey
  UIBlock.unblock(_scaffoldGlobalKey.currentContext);
 ```
+#
+
+## Using as a widget
+
+```dart
+//toggle showLoader to block/unblock
+FlatButton(
+    child: Text('Load Async'),
+    onPressed: () {
+        setState(() {
+            showLoader = !showLoader;
+        });
+    },
+),
+
+ // easily create custom block ui body
+ Container(
+    height: _height,
+    child: UIBlock(
+        loadingStateFromFuture: () async {
+        if (showLoader) {
+            // return null, to block ui
+            return null;
+        }
+        // unblocks ui on hasData or hasError
+        return Future.value(Random().nextInt(200));
+        },
+        barrierColor: Colors.blueGrey,
+        barrierOpacity: 0.2,
+        loadingTextWidget: Text('Loading data...'),
+        hideBuilderOnNullData: true,
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            return Center(child: Text('Async Data ${snapshot.data}'));
+        },
+    ),
+ );
+```
+
 #
 
 ### Blocking with text
@@ -104,6 +143,21 @@ For more details have a look at the other [examples](https://github.com/hey24she
 | imageFilter            | ImageFilter  |           - |
 | backgroundColor        |    Color     | transparent |
 | canDissmissOnBack      |     bool     |       false |
+
+
+## Widget Properties
+| Property               |            Type            |                         Default |
+| ---------------------- | :------------------------: | ------------------------------: |
+| builder                |          Function          |                you implement it |
+| loadingStateFromFuture | Future<dynamic> Function() | your future function (APIs,etc) |
+| loaderBuilder          |          Function          |                               - |
+| customLoaderChild      |           Widget           |                               - |
+| loadingTextWidget      |           Widget           |                               - |
+| offset                 |           offset           |                               - |
+| barrierOpacity         |           double           |                             0.4 |
+| barrierColor           |           Color            |                         black45 |
+| canDismiss             |            bool            |                           false |
+| hideBuilderOnNullData  |            bool            |                           false |
 
 #
 
