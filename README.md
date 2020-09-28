@@ -167,3 +167,7 @@ Help me by reporting bugs, **submit new ideas** for features or anything else th
 
 - Just [write an issue](https://github.com/hey24sheep/uiblock/issues) on GitHub. ✏️
 - And don't forget to hit the **like button** for this package ✌️
+  
+## More
+
+Check out my other useful packages on [pub.dev](https://pub.dev/packages?q=email%3Ahey24sheep%40gmail.com)
