@@ -122,6 +122,12 @@ class UIBlock extends StatelessWidget {
     Color backgroundColor,
     bool canDissmissOnBack,
     ImageFilter imageFilter,
+    bool safeAreaLeft,
+    bool safeAreaTop,
+    bool safeAreaRight,
+    bool safeAreaBottom,
+    EdgeInsets safeAreaMinimumPadding,
+    bool safeAreaMaintainBottomViewPadding,
   }) {
     Navigator.of(context).push(
       UIBlockModal(
@@ -131,6 +137,12 @@ class UIBlock extends StatelessWidget {
         backgroundColor: backgroundColor,
         canDissmissOnBack: canDissmissOnBack,
         imageFilter: imageFilter,
+        left: safeAreaLeft,
+        top: safeAreaTop,
+        right: safeAreaRight,
+        bottom: safeAreaBottom,
+        minimum: safeAreaMinimumPadding,
+        maintainBottomViewPadding: safeAreaMaintainBottomViewPadding,
       ),
     );
   }

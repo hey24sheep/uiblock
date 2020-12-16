@@ -134,15 +134,21 @@ For more details have a look at the other [examples](https://github.com/hey24she
 #
 
 ## Properties
-| Property               |     Type     |     Default |
-| ---------------------- | :----------: | ----------: |
-| context (**required**) | BuildContext |           - |
-| childBuilder           |   Function   |           - |
-| customLoaderChild      |    Widget    |           - |
-| loadingTextWidget      |    Widget    |           - |
-| imageFilter            | ImageFilter  |           - |
-| backgroundColor        |    Color     | transparent |
-| canDissmissOnBack      |     bool     |       false |
+| Property                               |     Type     |     Default      |                            Note                                 |
+| -------------------------------------- | :----------: | ---------------: | --------------------------------------------------------------: |
+| context (**required**)                 | BuildContext |           -      |                                                                 |
+| childBuilder                           |   Function   |           -      |                                                                 |
+| customLoaderChild                      |    Widget    |           -      |                                                                 |
+| loadingTextWidget                      |    Widget    |           -      |                                                                 |
+| imageFilter                            | ImageFilter  |           -      |                                                                 |
+| backgroundColor                        |    Color     |   Transparent    |                                                                 |
+| canDissmissOnBack                      |     bool     |       false      |                                                                 |
+| safeAreaLeft                           |     bool     |       true       | Set as 'false' to disable 'Left' Safe Area                      |
+| safeAreaTop                            |     bool     |       true       | Set as 'false' to disable 'Top' (usually status bar) Safe Area  |
+| safeAreaRight                          |     bool     |       true       | Set as 'false' to disable 'Right' Safe Area                     |
+| safeAreaBottom                         |     bool     |       true       | Set as 'false' to disable 'Bottom' Safe Area                    |
+| safeAreaMinimumPadding                 | EdgeInsets   | EdgeInsets.zero  |                                                                 |
+| safeAreaMaintainBottomViewPadding      |     bool     |       false      |                                                                 |
 
 
 ## Widget Properties
