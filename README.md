@@ -129,27 +129,48 @@ UIBlock.block(
  // Don't forget to call unblock after block :)
 ```
 
+### Creating custom block modal transitions (*only applicable on static UIBlock.block*)
+
+```dart
+// NOTE : only for on UIBlock.block as this uses Modal Barrier
+// widget block is inline widget replacement with loader widget
+
+UIBlock.block(
+    //...
+    // more code
+    customBuildBlockModalTransitions:
+        (context, animation, secondaryAnimation, child) {
+        return RotationTransition(
+            turns: animation,
+            child: child,
+        );
+    },
+    // ...
+);
+```
+
 For more details have a look at the other [examples](https://github.com/hey24sheep/uiblock/tree/master/example).
 
 #
 
 ## Properties
-| Property                               |     Type     |     Default      |                            Note                                 |
-| -------------------------------------- | :----------: | ---------------: | --------------------------------------------------------------: |
-| context (**required**)                 | BuildContext |           -      |                                                                 |
-| childBuilder                           |   Function   |           -      |                                                                 |
-| customLoaderChild                      |    Widget    |           -      |                                                                 |
-| loadingTextWidget                      |    Widget    |           -      |                                                                 |
-| imageFilter                            | ImageFilter  |           -      |                                                                 |
-| backgroundColor                        |    Color     |   Transparent    |                                                                 |
-| canDissmissOnBack                      |     bool     |       false      |                                                                 |
-| safeAreaLeft                           |     bool     |       true       | Set as 'false' to disable 'Left' Safe Area                      |
-| safeAreaTop                            |     bool     |       true       | Set as 'false' to disable 'Top' (usually status bar) Safe Area  |
-| safeAreaRight                          |     bool     |       true       | Set as 'false' to disable 'Right' Safe Area                     |
-| safeAreaBottom                         |     bool     |       true       | Set as 'false' to disable 'Bottom' Safe Area                    |
-| safeAreaMinimumPadding                 | EdgeInsets   | EdgeInsets.zero  |                                                                 |
-| safeAreaMaintainBottomViewPadding      |     bool     |       false      |                                                                 |
-
+| Property                          |     Type     |         Default |                                                           Note |
+| --------------------------------- | :----------: | --------------: | -------------------------------------------------------------: |
+| context (**required**)            | BuildContext |               - |                                                                |
+| childBuilder                      |   Function   |               - |                                                                |
+| customLoaderChild                 |    Widget    |               - |                                                                |
+| loadingTextWidget                 |    Widget    |               - |                                                                |
+| imageFilter                       | ImageFilter  |               - |                                                                |
+| backgroundColor                   |    Color     |     Transparent |                                                                |
+| canDissmissOnBack                 |     bool     |           false |                                                                |
+| safeAreaLeft                      |     bool     |            true |                     Set as 'false' to disable 'Left' Safe Area |
+| safeAreaTop                       |     bool     |            true | Set as 'false' to disable 'Top' (usually status bar) Safe Area |
+| safeAreaRight                     |     bool     |            true |                    Set as 'false' to disable 'Right' Safe Area |
+| safeAreaBottom                    |     bool     |            true |                   Set as 'false' to disable 'Bottom' Safe Area |
+| safeAreaMinimumPadding            |  EdgeInsets  | EdgeInsets.zero |                                                                |
+| safeAreaMaintainBottomViewPadding |     bool     |           false |                                                                |
+| isSlideTransitionDefault          |     bool     |           true  | Toggle between slide or fade transition                        |
+| buildBlockModalTransitions        |   Function   |               - | Use this to create custom transition other than fade/slide     |
 
 ## Widget Properties
 | Property               |            Type            |                         Default |

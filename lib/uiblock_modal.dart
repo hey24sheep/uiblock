@@ -5,6 +5,11 @@ import 'package:flutter/widgets.dart';
 import 'package:uiblock/default_uiblock_loader.dart';
 
 typedef Widget ChildBuilder(BuildContext context);
+typedef Widget BuildBlockModalTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child);
 
 /// default ui block modal with default loader
 class UIBlockModal extends PopupRoute<void> {
@@ -20,6 +25,8 @@ class UIBlockModal extends PopupRoute<void> {
     this.bottom,
     this.minimum,
     this.maintainBottomViewPadding,
+    this.buildBlockModalTransitions,
+    this.isSlideTransitionDefault,
     ImageFilter imageFilter,
   }) : super(filter: imageFilter) {
     customLoaderChild ??= UIBlockDefaultLoader();
@@ -33,6 +40,7 @@ class UIBlockModal extends PopupRoute<void> {
     bottom ??= true;
     minimum ??= EdgeInsets.zero;
     maintainBottomViewPadding ??= false;
+    isSlideTransitionDefault ??= true;
   }
 
   ImageFilter imageFilter;
@@ -80,6 +88,11 @@ class UIBlockModal extends PopupRoute<void> {
   /// keyboard due to the change in the padding value. Setting this to true will
   /// avoid the UI shift.
   bool maintainBottomViewPadding;
+
+  // provide this to give custom transition to block modal
+  BuildBlockModalTransitions buildBlockModalTransitions;
+
+  bool isSlideTransitionDefault;
 
   @override
   Duration get transitionDuration => const Duration(milliseconds: 200);
@@ -144,18 +157,28 @@ class UIBlockModal extends PopupRoute<void> {
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
-    // Create transition from bottom to top, like bottom sheet
-    return SlideTransition(
-      position: CurvedAnimation(
-        parent: animation,
-        curve: Curves.fastLinearToSlowEaseIn,
-      ).drive(
-        Tween<Offset>(
-          begin: Offset(0.0, 10.0),
-          end: Offset(0.0, 0.0),
+    if (buildBlockModalTransitions != null) {
+      return buildBlockModalTransitions(
+          context, animation, secondaryAnimation, child);
+    }
+
+    if (isSlideTransitionDefault) {
+      // Create transition from bottom to top, like bottom sheet
+      return SlideTransition(
+        position: CurvedAnimation(
+          parent: animation,
+          curve: Curves.fastLinearToSlowEaseIn,
+        ).drive(
+          Tween<Offset>(
+            begin: Offset(0.0, 10.0),
+            end: Offset(0.0, 0.0),
+          ),
         ),
-      ),
-      child: child,
-    );
+        child: child,
+      );
+    }
+
+    // Create fade transition effect
+    return FadeTransition(opacity: animation, child: child);
   }
 }

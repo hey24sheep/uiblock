@@ -128,6 +128,8 @@ class UIBlock extends StatelessWidget {
     bool safeAreaBottom,
     EdgeInsets safeAreaMinimumPadding,
     bool safeAreaMaintainBottomViewPadding,
+    bool isSlideTransitionDefault = true,
+    BuildBlockModalTransitions customBuildBlockModalTransitions,
   }) {
     Navigator.of(context).push(
       UIBlockModal(
@@ -143,6 +145,8 @@ class UIBlock extends StatelessWidget {
         bottom: safeAreaBottom,
         minimum: safeAreaMinimumPadding,
         maintainBottomViewPadding: safeAreaMaintainBottomViewPadding,
+        isSlideTransitionDefault: isSlideTransitionDefault,
+        buildBlockModalTransitions: customBuildBlockModalTransitions,
       ),
     );
   }
