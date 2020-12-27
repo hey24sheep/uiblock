@@ -12,7 +12,7 @@ typedef Widget BuildBlockModalTransitions(
     Widget child);
 
 /// default ui block modal with default loader
-class UIBlockModal extends PopupRoute<void> {
+class UIBlockModal<T> extends PopupRoute<T> {
   UIBlockModal({
     this.childBuilder,
     this.customLoaderChild,

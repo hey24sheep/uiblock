@@ -1,3 +1,10 @@
+## [1.2.0] - 27 December 2020
+
+* Now `UIBlock.Block` can return data on dismiss/unblock
+* Docs updated
+* Examples updated
+  
+  
 ## [1.1.0] - 24 December 2020
 
 * Added fade transition to block modal

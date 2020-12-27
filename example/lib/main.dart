@@ -110,6 +110,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
                     // custom using childBUilder
                     _buildCustomWithChildBuilder(context),
+
+                    SizedBox(height: 24),
+
+                    // default dissmissible with data
+                    _buildDefaultDissmissibleWithData(context),
                   ],
                 ),
               ),
@@ -259,6 +264,41 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             },
           );
+        },
+      ),
+    );
+  }
+
+  Widget _buildDefaultDissmissibleWithData(BuildContext context) {
+    return Container(
+      child: FlatButton(
+        child: Text(
+          "Default UIBlock (Dissmiss Enabled) With Data",
+          textAlign: TextAlign.center,
+        ),
+        onPressed: () async {
+          var result = await UIBlock.blockWithData(
+            _scaffoldGlobalKey.currentContext,
+            loadingTextWidget: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FlatButton(
+                onPressed: () {
+                  UIBlock.unblockWithData(context, "hello world");
+                },
+                child: Text(
+                  'Press here to dissmiss with data. Back for null',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          );
+
+          print(result);
         },
       ),
     );

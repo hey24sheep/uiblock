@@ -149,6 +149,35 @@ UIBlock.block(
 );
 ```
 
+ ## Using with data return
+
+ ``` dart
+ // NOTE : canDissmissOnBack is alaways true
+  var result = await UIBlock.blockWithData(
+            _scaffoldGlobalKey.currentContext,
+            loadingTextWidget: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FlatButton(
+                onPressed: () {
+                    // unblock and return data
+                    UIBlock.unblockWithData(context, "hello world");
+                },
+                child: Text(
+                        'Press here to dissmiss with data. Back for null',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w600,
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+    print(result);
+```
+
 For more details have a look at the other [examples](https://github.com/hey24sheep/uiblock/tree/master/example).
 
 #

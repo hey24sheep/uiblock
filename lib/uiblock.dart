@@ -132,7 +132,7 @@ class UIBlock extends StatelessWidget {
     BuildBlockModalTransitions customBuildBlockModalTransitions,
   }) {
     Navigator.of(context).push(
-      UIBlockModal(
+      UIBlockModal<void>(
         childBuilder: childBuilder,
         customLoaderChild: customLoaderChild,
         loadingTextWidget: loadingTextWidget,
@@ -154,5 +154,48 @@ class UIBlock extends StatelessWidget {
   /// unblocks previously called block
   static void unblock(BuildContext context) {
     Navigator.of(context).pop(context);
+  }
+
+  /// blocks complete ui
+  /// do not forget to call unblock after this
+  static Future<T> blockWithData<T>(
+    BuildContext context, {
+    ChildBuilder childBuilder,
+    Widget customLoaderChild,
+    Widget loadingTextWidget,
+    Color backgroundColor,
+    ImageFilter imageFilter,
+    bool safeAreaLeft,
+    bool safeAreaTop,
+    bool safeAreaRight,
+    bool safeAreaBottom,
+    EdgeInsets safeAreaMinimumPadding,
+    bool safeAreaMaintainBottomViewPadding,
+    bool isSlideTransitionDefault = true,
+    BuildBlockModalTransitions customBuildBlockModalTransitions,
+  }) async {
+    return await Navigator.of(context).push<T>(
+      UIBlockModal<T>(
+        childBuilder: childBuilder,
+        customLoaderChild: customLoaderChild,
+        loadingTextWidget: loadingTextWidget,
+        backgroundColor: backgroundColor,
+        canDissmissOnBack: true, // this cannot be false for data routes
+        imageFilter: imageFilter,
+        left: safeAreaLeft,
+        top: safeAreaTop,
+        right: safeAreaRight,
+        bottom: safeAreaBottom,
+        minimum: safeAreaMinimumPadding,
+        maintainBottomViewPadding: safeAreaMaintainBottomViewPadding,
+        isSlideTransitionDefault: isSlideTransitionDefault,
+        buildBlockModalTransitions: customBuildBlockModalTransitions,
+      ),
+    );
+  }
+
+  /// unblocks previously called block with return data
+  static void unblockWithData(BuildContext context, dynamic onPopData) {
+    Navigator.of(context).pop(onPopData);
   }
 }
