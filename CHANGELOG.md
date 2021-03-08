@@ -1,3 +1,8 @@
+## [2.0.0] - 08 March 2021
+* Stable release for null safety
+* Example updated to null safety
+* Update SDK constraints to >=2.12.0-0 <3.0.0 based on guidelines
+
 ## [1.2.0] - 27 December 2020
 
 * Now `UIBlock.Block` can return data on dismiss/unblock
