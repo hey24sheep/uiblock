@@ -27,7 +27,7 @@ class UIBlockModal<T> extends PopupRoute<T> {
     this.maintainBottomViewPadding,
     this.buildBlockModalTransitions,
     this.isSlideTransitionDefault,
-    ImageFilter imageFilter,
+    ImageFilter? imageFilter,
   }) : super(filter: imageFilter) {
     customLoaderChild ??= UIBlockDefaultLoader();
     loadingTextWidget ??= Container();
@@ -43,38 +43,38 @@ class UIBlockModal<T> extends PopupRoute<T> {
     isSlideTransitionDefault ??= true;
   }
 
-  ImageFilter imageFilter;
+  ImageFilter? imageFilter;
 
   /// a function to build the body of loader page
-  ChildBuilder childBuilder;
+  ChildBuilder? childBuilder;
 
   /// a custom loader widget to show in place of default loader
-  Widget customLoaderChild;
+  Widget? customLoaderChild;
 
   /// show custom text widget below default loader
-  Widget loadingTextWidget;
+  Widget? loadingTextWidget;
 
-  Color backgroundColor;
-  Duration transitionDurationVal;
-  bool canDissmissOnBack;
+  Color? backgroundColor;
+  Duration? transitionDurationVal;
+  bool? canDissmissOnBack;
 
   /// Whether to avoid system intrusions on the left.
-  bool left;
+  bool? left;
 
   /// Whether to avoid system intrusions at the top of the screen, typically the
   /// system status bar.
-  bool top;
+  bool? top;
 
   /// Whether to avoid system intrusions on the right.
-  bool right;
+  bool? right;
 
   /// Whether to avoid system intrusions on the bottom side of the screen.
-  bool bottom;
+  bool? bottom;
 
   /// This minimum padding to apply.
   ///
   /// The greater of the minimum insets and the media padding will be applied.
-  EdgeInsets minimum;
+  EdgeInsets? minimum;
 
   /// Specifies whether the [SafeArea] should maintain the
   /// [MediaQueryData.viewPadding] instead of the [MediaQueryData.padding] when
@@ -87,18 +87,18 @@ class UIBlockModal<T> extends PopupRoute<T> {
   /// flexible widgets, which could visibly move when opening a software
   /// keyboard due to the change in the padding value. Setting this to true will
   /// avoid the UI shift.
-  bool maintainBottomViewPadding;
+  bool? maintainBottomViewPadding;
 
   // provide this to give custom transition to block modal
-  BuildBlockModalTransitions buildBlockModalTransitions;
+  BuildBlockModalTransitions? buildBlockModalTransitions;
 
-  bool isSlideTransitionDefault;
+  bool? isSlideTransitionDefault;
 
   @override
   Duration get transitionDuration => const Duration(milliseconds: 200);
 
   @override
-  bool get canPop => canDissmissOnBack;
+  bool get canPop => canDissmissOnBack!;
 
   @override
   bool get opaque => false;
@@ -110,7 +110,7 @@ class UIBlockModal<T> extends PopupRoute<T> {
   Color get barrierColor => Colors.black12;
 
   @override
-  String get barrierLabel => null;
+  String? get barrierLabel => null;
 
   @override
   Widget buildPage(
@@ -121,21 +121,21 @@ class UIBlockModal<T> extends PopupRoute<T> {
     // This makes sure that text and other content follows the material style
     return WillPopScope(
       onWillPop: () async {
-        return canDissmissOnBack;
+        return canDissmissOnBack!;
       },
       child: SafeArea(
-        top: top,
-        bottom: bottom,
-        left: left,
-        right: right,
-        maintainBottomViewPadding: maintainBottomViewPadding,
-        minimum: minimum,
+        top: top!,
+        bottom: bottom!,
+        left: left!,
+        right: right!,
+        maintainBottomViewPadding: maintainBottomViewPadding!,
+        minimum: minimum!,
         child: Material(
           type: MaterialType.canvas,
           elevation: 1.0,
           color: backgroundColor,
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: childBuilder(context),
+          child: childBuilder!(context),
         ),
       ),
     );
@@ -146,9 +146,9 @@ class UIBlockModal<T> extends PopupRoute<T> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          customLoaderChild,
-          loadingTextWidget,
+        children: [
+          customLoaderChild!,
+          loadingTextWidget!,
         ],
       ),
     );
@@ -158,11 +158,11 @@ class UIBlockModal<T> extends PopupRoute<T> {
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
     if (buildBlockModalTransitions != null) {
-      return buildBlockModalTransitions(
+      return buildBlockModalTransitions!(
           context, animation, secondaryAnimation, child);
     }
 
-    if (isSlideTransitionDefault) {
+    if (isSlideTransitionDefault!) {
       // Create transition from bottom to top, like bottom sheet
       return SlideTransition(
         position: CurvedAnimation(

@@ -12,9 +12,9 @@ typedef AsyncChildBuilder<T> = Widget Function(
 
 class UIBlock extends StatelessWidget {
   UIBlock({
-    Key key,
-    @required this.builder,
-    @required this.loadingStateFromFuture,
+    Key? key,
+    required this.builder,
+    required this.loadingStateFromFuture,
     this.loaderBuilder,
     this.customLoaderChild,
     this.loadingTextWidget,
@@ -23,18 +23,16 @@ class UIBlock extends StatelessWidget {
     this.barrierColor = Colors.black45,
     this.canDissmiss = false,
     this.hideBuilderOnNullData = false,
-  })  : assert(builder != null),
-        assert(loadingStateFromFuture != null),
-        super(key: key);
+  }) : super(key: key);
 
   /// a function to build the body of block page
-  final ChildBuilder loaderBuilder;
+  final ChildBuilder? loaderBuilder;
 
   /// a custom loader widget to show in place of default loader
-  final Widget customLoaderChild;
+  final Widget? customLoaderChild;
 
   /// show custom text widget below default loader
-  final Widget loadingTextWidget;
+  final Widget? loadingTextWidget;
 
   /// child widget to show underneath the loader barrier
   final AsyncChildBuilder builder;
@@ -45,7 +43,7 @@ class UIBlock extends StatelessWidget {
   final Future<dynamic> Function() loadingStateFromFuture;
   final double barrierOpacity;
   final Color barrierColor;
-  final Offset offset;
+  final Offset? offset;
   final bool canDissmiss;
 
   /// whether to show or hide builder func data when ui is blocked
@@ -87,23 +85,29 @@ class UIBlock extends StatelessWidget {
 
   Widget _buildLoader(BuildContext context) {
     if (loaderBuilder != null) {
-      return loaderBuilder(context);
+      return loaderBuilder!(context);
     }
+
+    final _customLoaderChild =
+        customLoaderChild != null ? customLoaderChild! : UIBlockDefaultLoader();
+
+    final _loadingTextWidget =
+        loadingTextWidget != null ? loadingTextWidget! : Container();
 
     final _defaultLoader = Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        customLoaderChild != null ? customLoaderChild : UIBlockDefaultLoader(),
-        loadingTextWidget != null ? loadingTextWidget : Container(),
+      children: [
+        _customLoaderChild,
+        _loadingTextWidget,
       ],
     );
 
     if (offset != null) {
       return Positioned(
         child: _defaultLoader,
-        left: offset.dx,
-        top: offset.dy,
+        left: offset!.dx,
+        top: offset!.dy,
       );
     }
 
@@ -116,20 +120,20 @@ class UIBlock extends StatelessWidget {
   /// do not forget to call unblock after this
   static void block(
     BuildContext context, {
-    ChildBuilder childBuilder,
-    Widget customLoaderChild,
-    Widget loadingTextWidget,
-    Color backgroundColor,
-    bool canDissmissOnBack,
-    ImageFilter imageFilter,
-    bool safeAreaLeft,
-    bool safeAreaTop,
-    bool safeAreaRight,
-    bool safeAreaBottom,
-    EdgeInsets safeAreaMinimumPadding,
-    bool safeAreaMaintainBottomViewPadding,
+    ChildBuilder? childBuilder,
+    Widget? customLoaderChild,
+    Widget? loadingTextWidget,
+    Color? backgroundColor,
+    bool? canDissmissOnBack,
+    ImageFilter? imageFilter,
+    bool? safeAreaLeft,
+    bool? safeAreaTop,
+    bool? safeAreaRight,
+    bool? safeAreaBottom,
+    EdgeInsets? safeAreaMinimumPadding,
+    bool? safeAreaMaintainBottomViewPadding,
     bool isSlideTransitionDefault = true,
-    BuildBlockModalTransitions customBuildBlockModalTransitions,
+    BuildBlockModalTransitions? customBuildBlockModalTransitions,
   }) {
     Navigator.of(context).push(
       UIBlockModal<void>(
@@ -158,21 +162,21 @@ class UIBlock extends StatelessWidget {
 
   /// blocks complete ui
   /// do not forget to call unblock after this
-  static Future<T> blockWithData<T>(
+  static Future<T?> blockWithData<T>(
     BuildContext context, {
-    ChildBuilder childBuilder,
-    Widget customLoaderChild,
-    Widget loadingTextWidget,
-    Color backgroundColor,
-    ImageFilter imageFilter,
-    bool safeAreaLeft,
-    bool safeAreaTop,
-    bool safeAreaRight,
-    bool safeAreaBottom,
-    EdgeInsets safeAreaMinimumPadding,
-    bool safeAreaMaintainBottomViewPadding,
+    ChildBuilder? childBuilder,
+    Widget? customLoaderChild,
+    Widget? loadingTextWidget,
+    Color? backgroundColor,
+    ImageFilter? imageFilter,
+    bool? safeAreaLeft,
+    bool? safeAreaTop,
+    bool? safeAreaRight,
+    bool? safeAreaBottom,
+    EdgeInsets? safeAreaMinimumPadding,
+    bool? safeAreaMaintainBottomViewPadding,
     bool isSlideTransitionDefault = true,
-    BuildBlockModalTransitions customBuildBlockModalTransitions,
+    BuildBlockModalTransitions? customBuildBlockModalTransitions,
   }) async {
     return await Navigator.of(context).push<T>(
       UIBlockModal<T>(
