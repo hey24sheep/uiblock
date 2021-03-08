@@ -22,6 +22,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all(Colors.black),
+          ),
+        ),
       ),
       home: MyHomePage(),
     );
@@ -29,7 +34,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -59,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text('Load Async'),
                 onPressed: () {
                   setState(() {
@@ -127,17 +132,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildDefault(BuildContext context) {
     return Container(
-      child: FlatButton(
+      child: TextButton(
         child: Text(
           "Default UIBlock (Dissmiss Disabled)",
           textAlign: TextAlign.center,
         ),
         onPressed: () async {
-          UIBlock.block(_scaffoldGlobalKey.currentContext);
+          UIBlock.block(_scaffoldGlobalKey.currentContext!);
 
           await Future.delayed(Duration(seconds: 3), () => '1');
 
-          UIBlock.unblock(_scaffoldGlobalKey.currentContext);
+          UIBlock.unblock(_scaffoldGlobalKey.currentContext!);
         },
       ),
     );
@@ -145,14 +150,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildDefaultDissmissible(BuildContext context) {
     return Container(
-      child: FlatButton(
+      child: TextButton(
         child: Text(
           "Default UIBlock (Dissmiss Enabled)",
           textAlign: TextAlign.center,
         ),
         onPressed: () async {
           UIBlock.block(
-            _scaffoldGlobalKey.currentContext,
+            _scaffoldGlobalKey.currentContext!,
             canDissmissOnBack: true,
             loadingTextWidget: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -174,14 +179,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildDefaultWithText(BuildContext context) {
     return Container(
-      child: FlatButton(
+      child: TextButton(
         child: Text(
           "Default UIBlock With Text (Dissmiss Disabled)",
           textAlign: TextAlign.center,
         ),
         onPressed: () async {
           UIBlock.block(
-            _scaffoldGlobalKey.currentContext,
+            _scaffoldGlobalKey.currentContext!,
             loadingTextWidget: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -198,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
           Future.delayed(
             Duration(seconds: 3),
-            () => UIBlock.unblock(_scaffoldGlobalKey.currentContext),
+            () => UIBlock.unblock(_scaffoldGlobalKey.currentContext!),
           );
         },
       ),
@@ -207,14 +212,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildCustomWithChildBuilder(BuildContext context) {
     return Container(
-      child: FlatButton(
+      child: TextButton(
         child: Text(
           "Custom UIBlock With Child Builder & State",
           textAlign: TextAlign.center,
         ),
         onPressed: () async {
           UIBlock.block(
-            _scaffoldGlobalKey.currentContext,
+            _scaffoldGlobalKey.currentContext!,
             backgroundColor: Colors.green.withOpacity(0.5),
             imageFilter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
             childBuilder: (BuildContext context) {
@@ -271,17 +276,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildDefaultDissmissibleWithData(BuildContext context) {
     return Container(
-      child: FlatButton(
+      child: TextButton(
         child: Text(
           "Default UIBlock (Dissmiss Enabled) With Data",
           textAlign: TextAlign.center,
         ),
         onPressed: () async {
           var result = await UIBlock.blockWithData(
-            _scaffoldGlobalKey.currentContext,
+            _scaffoldGlobalKey.currentContext!,
             loadingTextWidget: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: FlatButton(
+              child: TextButton(
                 onPressed: () {
                   UIBlock.unblockWithData(context, "hello world");
                 },
