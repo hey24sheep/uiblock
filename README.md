@@ -24,7 +24,7 @@
 </p>
 
 ## Getting Started
-Add the dependency `uiblock: ^0.1.0` to your project and start using **uiblock** everywhere:
+Add the dependency `uiblock: ^2.0.0` to your project and start using **uiblock** everywhere:
 ```dart
 import 'package:uiblock/uiblock.dart';
 ```
