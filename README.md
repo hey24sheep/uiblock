@@ -3,6 +3,12 @@
 [![GitHub Stars](https://img.shields.io/github/stars/hey24sheep/uiblock.svg?logo=github)](https://github.com/hey24sheep/uiblock)
 [![Platform](https://img.shields.io/badge/platform-android%20|%20ios-green.svg)](https://img.shields.io/badge/platform-Android%20%7C%20iOS-green.svg)
 
+
+<p>
+<a href="https://www.buymeacoffee.com/hey24sheep" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
+</a>
+</p>
+
 **Easiest and simplest method to block/unblock ui for your flutter apps.**
 
 **One line of code** to **block/unblock ui** and stop user from navigating during loading or processing in your flutter apps. You could use it as a widget or directly as a global service/util.
@@ -198,8 +204,8 @@ For more details have a look at the other [examples](https://github.com/hey24she
 | safeAreaBottom                    |     bool     |            true |                   Set as 'false' to disable 'Bottom' Safe Area |
 | safeAreaMinimumPadding            |  EdgeInsets  | EdgeInsets.zero |                                                                |
 | safeAreaMaintainBottomViewPadding |     bool     |           false |                                                                |
-| isSlideTransitionDefault          |     bool     |           true  | Toggle between slide or fade transition                        |
-| buildBlockModalTransitions        |   Function   |               - | Use this to create custom transition other than fade/slide     |
+| isSlideTransitionDefault          |     bool     |            true |                        Toggle between slide or fade transition |
+| buildBlockModalTransitions        |   Function   |               - |     Use this to create custom transition other than fade/slide |
 
 ## Widget Properties
 | Property               |            Type            |                         Default |
@@ -223,7 +229,7 @@ Help me by reporting bugs, **submit new ideas** for features or anything else th
 
 - Just [write an issue](https://github.com/hey24sheep/uiblock/issues) on GitHub. ✏️
 - And don't forget to hit the **like button** for this package ✌️
-  
+
 ## More
 
 Check out my other useful packages on [pub.dev](https://pub.dev/packages?q=email%3Ahey24sheep%40gmail.com)
