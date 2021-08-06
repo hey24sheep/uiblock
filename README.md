@@ -34,7 +34,7 @@ With `null-safety`
 
 ```dart
       dependencies:
-        backdrop_modal_route: ^2.0.0
+        backdrop_modal_route: ^2.0.1
 ```
 
 Without `null-safety`
