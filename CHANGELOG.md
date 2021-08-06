@@ -1,3 +1,6 @@
+## [2.0.1] - 06 August 2021
+* Updated docs
+
 ## [2.0.0] - 08 March 2021
 * Stable release for null safety
 * Example updated to null safety
