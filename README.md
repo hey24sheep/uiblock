@@ -34,14 +34,14 @@ With `null-safety`
 
 ```dart
       dependencies:
-        backdrop_modal_route: ^2.0.1
+        uiblock: ^2.0.1
 ```
 
 Without `null-safety`
       
 ```dart
       dependencies:
-        backdrop_modal_route: 1.2.0
+        uiblock: 1.2.0
 ```
  
 ## Getting Started

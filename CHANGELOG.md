@@ -1,3 +1,6 @@
+## [2.0.2] - 06 August 2021
+* Fixed docs
+
 ## [2.0.1] - 06 August 2021
 * Updated docs
 
